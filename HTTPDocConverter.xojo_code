@@ -11,7 +11,7 @@ Inherits httpsocket
 		Sub PageReceived(url as string, httpStatus as integer, headers as internetHeaders, content as string)
 		  If  registeredCallback <> Nil Then
 		    
-		     registeredCallback.Invoke content, convertedToType
+		    registeredCallback.Invoke content, convertedToType
 		    
 		  End If
 		End Sub
@@ -322,10 +322,19 @@ Inherits httpsocket
 	#tag EndProperty
 
 
+	#tag Constant, Name = kDOCX, Type = String, Dynamic = False, Default = \"docx", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kePUB, Type = String, Dynamic = False, Default = \"ePub", Scope = Public
 	#tag EndConstant
 
+	#tag Constant, Name = kMOBI, Type = String, Dynamic = False, Default = \"mobi", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = kPDF, Type = String, Dynamic = False, Default = \"pdf", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kRTF, Type = String, Dynamic = False, Default = \"rtf", Scope = Public
 	#tag EndConstant
 
 
