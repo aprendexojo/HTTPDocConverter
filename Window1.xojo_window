@@ -36,7 +36,7 @@ End
 		  
 		  If f <> Nil Then
 		    
-		    Dim post As New HTTPDocConverter(HTTPDocConverter.kdocx,f, AddressOf conversioncompleted)
+		    Dim post As New HTTPDocConverter(HTTPDocConverter.kPDF,f, AddressOf conversioncompleted)
 		    
 		    post.getConvertedFile
 		    

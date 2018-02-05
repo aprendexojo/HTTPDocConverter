@@ -52,6 +52,24 @@ Inherits httpsocket
 		  
 		  registeredCallback = notification
 		  
+		  encodeRequest( inputFile, convertDataTo )
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Disconnect()
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function EncodeFormData(form as dictionary) As string
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub encodeRequest(inputFile as FolderItem, convertdataTo as String)
 		  Dim formData As New Dictionary
 		  
 		  formData.Value("input_files[]") = inputFile
@@ -63,7 +81,7 @@ Inherits httpsocket
 		  Dim boundary As String = ""
 		  
 		  
-		  Boundary = "--" + Right(EncodeHex(MD5(Str(Microseconds))), 24) + "-bOuNdArY"
+		  Boundary = "--" + Right(EncodeHex(MD5(Str(Microseconds))), 24) + "-reQLimIT"
 		  
 		  
 		  Static CRLF As String = EndOfLine.Windows
@@ -79,35 +97,19 @@ Inherits httpsocket
 		    Elseif FormData.Value(Key) IsA FolderItem Then
 		      Dim file As FolderItem = FormData.Value(key)
 		      out.Write("Content-Disposition: form-data; name=""" + key + """" + "; filename="""+inputFile.Name+""""+ CRLF)
-		      out.Write("Content-Type: text/html" + CRLF + CRLF) ' replace with actual MIME Type
+		      out.Write("Content-Type: text/html" + CRLF + CRLF)
 		      Dim bs As BinaryStream = BinaryStream.Open(File)
 		      out.Write(bs.Read(bs.Length) + CRLF)
 		      bs.Close
 		    End If
 		  Next
+		  
 		  out.Write("--" + Boundary + "--" + CRLF)
 		  out.Close
 		  
-		  #If RBVersion > 2012 Then
-		    Super.SetRequestContent(data, "multipart/form-data; boundary=" + Boundary)
-		  #Else
-		    super.SetRequestContent(data, "multipart/form-data; boundary=" + Boundary)
-		  #EndIf
-		  
+		  Super.SetRequestContent(data, "multipart/form-data; boundary=" + Boundary)
 		  
 		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub Disconnect()
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Function EncodeFormData(form as dictionary) As string
-		  
-		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
@@ -154,7 +156,7 @@ Inherits httpsocket
 
 	#tag Method, Flags = &h0
 		Sub getConvertedFile()
-		  super.post("http://c.docverter.com/convert")
+		  Super.post("http://c.docverter.com/convert")
 		End Sub
 	#tag EndMethod
 
